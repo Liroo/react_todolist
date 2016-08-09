@@ -10,10 +10,10 @@ import FilterContainer from '../containers/filterContainer';
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: 57,
     flex: 1,
   },
 });
-
 class AppComponent extends Component {
 
   render() {

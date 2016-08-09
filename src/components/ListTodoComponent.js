@@ -1,7 +1,6 @@
 // @flow
 import React, { Component } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import type { todoType } from '../types/todoType';
 import { FILTER_COMPLETE, FILTER_INCOMPLETE } from '../types/filterType';
 import ItemTodoComponent from './ItemTodoComponent';
 import ReactTransitionGroup from './TransitionGroup';
@@ -10,14 +9,14 @@ const styles = StyleSheet.create({
   container: {
     borderColor: 'rgba(109, 116, 71, 0.1)',
     borderWidth: 3,
-    margin: 20,
+    margin: 15,
     borderRadius: 4,
-    height: 415,
+    height: 365,
   },
 });
 
 type listTodoProps = {
-  todos: Array<todoType>,
+  todos: Object,
   filterStatus: string,
   actions: Object,
 };
@@ -36,17 +35,16 @@ class ListTodoComponent extends Component {
     return (
       <ItemTodoComponent
         todo={todo}
-        completeTodo={actions.completeTodo}
-        incompleteTodo={actions.incompleteTodo}
-        key={todo.id} />
+        updateTodo={actions.updateTodo}
+        addTodo={actions.addTodo}
+        key={todo.get('id')} />
     );
   }
 
   render() {
     const todos = this.props.todos.filter((todo) => {
-      if (this.props.filterStatus === FILTER_COMPLETE && !todo.completed) {
-        return false;
-      } else if (this.props.filterStatus === FILTER_INCOMPLETE && todo.completed) {
+      if (this.props.filterStatus === FILTER_COMPLETE && !todo.get('completed') ||
+      this.props.filterStatus === FILTER_INCOMPLETE && todo.get('completed')) {
         return false;
       }
       return true;

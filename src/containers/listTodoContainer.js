@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import ListTodoComponent from '../components/ListTodoComponent';
 import type { appReducer } from '../reducers/indexReducer';
-import { completeTodo, incompleteTodo } from '../actions/todoAction';
+import { addTodo, updateTodo } from '../actions/todoAction';
 
 function getTodoState(AppState: appReducer) {
   return {
@@ -15,7 +15,7 @@ function getTodoState(AppState: appReducer) {
 
 function setTodoState(dispatch) {
   return {
-    actions: bindActionCreators({ completeTodo, incompleteTodo }, dispatch),
+    actions: bindActionCreators({ addTodo, updateTodo }, dispatch),
   };
 }
 
